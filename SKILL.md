@@ -168,6 +168,8 @@ doctl compute droplet delete <id>
 
 ## App Platform
 
+> **Deployment workflow:** App Platform projects are connected to GitHub. To deploy, just push to the linked branch — DO picks it up automatically. You do **not** need to wait for the deployment to finish or trigger it manually. Push to GitHub and move on.
+
 ```bash
 # List all apps
 doctl apps list
@@ -181,10 +183,10 @@ doctl apps logs <id> --type build      # build logs
 doctl apps logs <id> --type deploy     # deploy logs
 doctl apps logs <id> --no-follow | tail -50  # recent only
 
-# Deploy from spec (⚠️ requires approval)
+# Deploy from spec (⚠️ requires approval — only for new apps)
 doctl apps create --spec app.yaml
 
-# Trigger re-deploy (⚠️ requires approval)
+# Trigger re-deploy manually (⚠️ requires approval — rarely needed, prefer git push)
 doctl apps create-deployment <id>
 
 # Delete (⚠️ requires approval)
