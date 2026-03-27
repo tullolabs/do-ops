@@ -117,25 +117,6 @@ $DO_SPACES_CDN/project-name/images/file.jpg
 
 CDN URL = `$DO_SPACES_CDN` + `/` + path within bucket. Never use the raw Spaces endpoint URL in app code — always use CDN.
 
-### CDN Cache Flush
-
-After uploading or updating files, flush the CDN cache or changes won't be visible:
-
-```bash
-source ~/.env
-
-# Flush entire CDN cache
-doctl compute cdn flush $DO_SPACES_CDN_ID --files "*"
-
-# Flush specific path only
-doctl compute cdn flush $DO_SPACES_CDN_ID --files "project-name/images/file.jpg"
-
-# Get CDN ID if you don't have it
-doctl compute cdn list
-```
-
-> **Always flush after upload if the file was previously cached.** New files don't need a flush, but updates to existing files do.
-
 ---
 
 ## Droplets
