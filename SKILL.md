@@ -168,7 +168,7 @@ doctl compute droplet delete <id>
 
 ## App Platform
 
-> **Deployment workflow:** App Platform projects are connected to GitHub. To deploy, just push to the linked branch — DO picks it up automatically. You do **not** need to wait for the deployment to finish or trigger it manually. Push to GitHub and move on.
+> **Deployment workflow:** App Platform is connected to GitHub. Push to the linked branch and report back immediately. Do **not** poll deployment status, wait for builds, or trigger deploys manually. Push → done.
 
 ```bash
 # List all apps
