@@ -170,6 +170,19 @@ doctl compute droplet delete <id>
 
 > **Deployment workflow:** App Platform is connected to GitHub. Push to the linked branch and report back immediately. Do **not** poll deployment status, wait for builds, or trigger deploys manually. Push → done.
 
+### Static Sites on App Platform
+
+**Static sites must run at `/` — never under a sub-path.**
+
+App Platform serves static sites from their build directory root with no path rewriting. Attempting to host a static site under a sub-path (e.g. `/docs`) will break asset loading or client-side routing regardless of `baseUrl` or `preserve_path_prefix` settings — the ingress can route traffic to a component but cannot remap `/docs/assets/...` → `/assets/...` at the file-serve level.
+
+**The fix:** Give each static site its own domain or subdomain.
+- Point a CNAME to the App Platform ingress
+- Set `baseUrl: '/'` so all assets resolve from root
+- The static site serves correctly with no routing gymnastics
+
+Sub-path routing works for **dynamic backends** (services), not static sites.
+
 ```bash
 # List all apps
 doctl apps list
